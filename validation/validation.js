@@ -1,35 +1,35 @@
-const { celebrate, Joi } = require('celebrate');
+const { Joi } = require('celebrate');
 
 const email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const password = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
 const url = /^(https?:\/\/)(www\.)?([a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]+)#?$/;
 
 const validation = {
-  validateSignUp: celebrate({
+  validateSignUp: {
     body: Joi.object({
       email: Joi.string().pattern(email).required(),
       password: Joi.string().min(6).pattern(password).required(),
       name: Joi.string().required(),
     }),
-  }),
-  validateSignIn: celebrate({
+  },
+  validateSignIn: {
     body: Joi.object({
       email: Joi.string().required().pattern(email),
       password: Joi.string().required().pattern(password),
     }),
-  }),
-  validateUpdate: celebrate({
+  },
+  validateUpdate: {
     body: Joi.object({
       email: Joi.string().pattern(email),
       name: Joi.string(),
     }),
-  }),
-  validateMovieId: celebrate({
+  },
+  validateMovieId: {
     params: Joi.object({
       movieId: Joi.string().required().hex().length(24),
     }),
-  }),
-  allMovieComponents: celebrate({
+  },
+  allMovieComponents: {
     body: Joi.object({
       country: Joi.string().required(),
       director: Joi.string().required(),
@@ -43,7 +43,7 @@ const validation = {
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
     }),
-  }),
+  },
 };
 
 module.exports = validation;

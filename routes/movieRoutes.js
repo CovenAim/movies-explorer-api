@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const { celebrate } = require('celebrate');
-const { validation } = require('../validation/validationShema');
+const validation = require('../validation/validation');
 const movieController = require('../controllers/movieController');
 
 router.get('/', movieController.getMovies);
