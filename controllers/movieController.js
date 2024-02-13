@@ -4,10 +4,10 @@ const BadRequestError = require('../utils/BadRequestError');
 const NotFoundError = require('../utils/NotFoundError');
 const ForbiddenError = require('../utils/ForbiddenError');
 
-exports.getMovies = async (req, res, next) => {
+module.exports.getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({}).populate('owner').populate('likes');
-    res.status(http2.constants.HTTP_STATUS_OK).json(movies);
+    const movies = await Movie.find({ owner: req.user._id }).populate('owner');
+    res.status(http2.constants.HTTP_STATUS_OK).send(movies);
   } catch (err) {
     next(err);
   }
